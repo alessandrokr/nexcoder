@@ -11,10 +11,11 @@ Most coding tools force you to choose between convenience and control. nexcoder 
 - use an OpenAI-compatible cloud endpoint when you want a capable hosted model;
 - point the same client at a local llama.cpp server when code should stay on your machine;
 - keep the model connection separate from the rest of the coding workflow, making it easy to switch providers.
+- generate a codebase index to reduce token-usage drastically
 
 ## Requirements
 
-- Python 3.13 or newer
+- Python 3.14 or newer
 - [uv](https://docs.astral.sh/uv/)
 - an OpenAI API key for cloud generation, or a running llama.cpp server for local generation
 
@@ -38,17 +39,13 @@ At the moment this prints a short greeting while the generation commands are bei
 
 ### OpenAI or another hosted endpoint
 
-The cloud backend will use the standard OpenAI client configuration. Keep credentials in your shell environment rather than committing them to the repository:
+The cloud backend will use the standard OpenAI client configuration. Keep credentials in your config.yml file:
 
-```bash
-export OPENAI_API_KEY="your-api-key"
+```yaml
+api_base_url: 'http://127.0.0.1:8080/v1'
+api_key: 'YOUR_API_KEY'
 ```
 
-On Windows PowerShell, the equivalent is:
-
-```powershell
-$env:OPENAI_API_KEY = "your-api-key"
-```
 
 ### Local llama.cpp
 
@@ -60,10 +57,3 @@ llama-server -m ./models/your-model.gguf --port 8080
 
 The client can then use the local base URL, usually `http://localhost:8080/v1`, instead of a hosted provider. No cloud API key is needed for local-only generation.
 
-## Project status
-
-This is an intentionally small starting point rather than a finished coding agent. The next pieces are the provider configuration, prompt and context handling, and a useful CLI around code-generation tasks.
-
-## License
-
-No license has been selected yet.

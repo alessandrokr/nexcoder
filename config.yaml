@@ -1,0 +1,4 @@
+cache_dir: './cache/nexcoder/'
+api_base_url: 'http://127.0.0.1:8082/v1'
+api_key: 'YOUR_API_KEY'
+model: 'qwen2.5-coder'
